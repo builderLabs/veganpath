@@ -1,0 +1,57 @@
+REQUIRED COMPONENTS:
+
+1). Google Maps API Key
+
+A Google account is required for a Google Maps API Key.  
+
+Using your Google account, you can obtain a Google Maps API Key as follows:  
+
+Visit https://code.google.com/apis/console and log in with your Google Account.  
+Click the Services link from the left-hand menu.  
+Activate the Google Maps API v3 service.  
+Click the API Access link from the left-hand menu.  
+
+2). Yelp client id and client secret.  
+
+These can be obtained by registering with Yelp as a developer at:  
+
+https://www.yelp.com/developers  
+
+3). Python 2.7.x which can be downloaded from here:  
+
+https://www.python.org/downloads/  
+
+4). Flask - the Python micro-framework, which can be downloaded here:  
+
+http://flask.pocoo.org/  
+
+
+SETUP INSTRUCTIONS:
+
+Replace the contents of the credentials file with the corresponding Google Maps  
+API Key and Yelp client credentials.  
+
+The full path of the credentials file is:  
+
+./static/assets/docs/credentials  
+
+Replace the Google and Yelp credentials in this file (the parts between angle  
+brackets):
+
+{
+     "GOOGLE_MAPS_API_KEY":<GOOGLE_MAPS_API_KEY>  
+   , "YELP_CLIENT_ID":<YELP_CLIENT_ID>  
+   , "YELP_CLIENT_SECRET":<YELP_CLIENT_SECRET>  
+}
+
+Save the file when done editing.
+
+
+RUNNING THE APPLICATION:  
+
+The application may be launched from the command line as follows:
+
+```
+python app.py
+```
+

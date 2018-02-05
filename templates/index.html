@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+
+    <!--descriptive-->
+    <meta name="author" content="Ozan Akcin">
+    <meta name="description" content="">
+      
+    <!--functionality-->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+    <meta name="mobile-web-app-capable" content="yes">
+          
+    <!--project specific-->
+    <title>Vegan Path</title>
+    <base target="_blank">
+    
+    <!--favicon-->
+    <link rel="shortcut icon" href="{{ url_for('static',filename='assets/img/icons/favicon.ico') }}">
+  
+  </head>
+
+  <body>
+
+    <div class="container-fluid">
+
+      <div class="row">
+
+        <div class="col-xs-12 col-sm-5 col-md-4 col-lg-4" id="options-box">
+
+        <header>
+
+          <h1 id="banner">Vegan Path</h1>
+          <h4 id = "mantra">Go vegan. For you. For the planet.</h4>
+          <hr id="title-divider">            
+
+        </header>
+
+        <section class="operational-control">
+          
+          <div id="target-loc">
+          <input id="search-loc" type="text" placeholder="City/Location" data-bind="value: searchLoc, disable: useGPS, textInput: gpsMsg(), event:{change:manAdd}"/>
+          <span id="gps-search"><input id="current-loc" type="checkbox" data-bind="click: confirmGPS, checked: useGPS"/><label>GPS</label></span>
+          </div>
+
+          <div class="row" id="ignition">              
+              <div class="col-xs-4" id="launch"><button id="find" data-bind="click: launchQuery">GO VEGAN</button></div>
+              <div class="col-xs-8" id="msg-area" data-bind="text: msg()"></div>
+          </div>
+          
+          <hr id="options-filters">
+          <div class="row" id="option-filters">
+            <div class="col-xs-2" id="rank-by">
+              <select id="opt-rank-by" data-bind="value: rankSort, event:{change:reformat}">
+                <option value="dist" selected>Sort:</option>
+                <option value="dist">Dist</option>
+                <option value="price">Price</option>
+                <option value="rating">Rating</option>
+              </select>
+            </div>
+            <div class="col-xs-2" id="max-dist">
+              <select id="filt-max-dist" data-bind="value: maxDist, event:{change:reformat}">
+                <option value="all">Max:</option>
+                <option value="2">2</option>
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="20">20</option>
+                <option value="30">30</option>
+              </select>
+            </div>
+            <div class="col-xs-2" id="max-dist-unit">
+              <select class = "col-xs-2" id="filt-max-dist-unit" data-bind="value: maxDistUnits, event:{change:reformat}">
+                <option value="mi" selected>mi</option>
+                <option value="km" >km</option>
+              </select>
+            </div>
+            <div class="col-xs-4" id = "open-now">
+              <span id="filt-open-now-label">Open Now: <input type="checkbox" id="filt-open-now" data-bind="checked: openNow, event:{change:toggleOpenNow}"></span>
+            </div>
+          </div>
+
+            <br>
+            
+            <hr id="list-divider">
+            <div id="listings">
+               <ol id="spots" data-bind="foreach: myList">
+                  <li>
+                    <div>
+                        <span id="list-name" data-bind="text:[title]"></span><br>
+                        <span id="list-detail" data-bind="text:[content]"></span><br>
+                    </div>
+                  </li>
+               </ol>
+            </div>
+          </div>
+
+          </section>
+
+          <main>
+        
+          <div class="col-xs-12 col-sm-7 col-md-8 col-lg-8" id="maparea">
+
+          <div id="floating-listings">
+          <ol id="spots" data-bind="foreach: myList">
+                  <li>
+                    <div>
+                        <span id="list-name" data-bind="text:[title]"></span><br>
+                        <span id="list-detail" data-bind="text:[content]"></span><br>
+                    </div>
+                  </li>
+               </ol>
+          </div>
+
+          <div id="map">            
+            <script async defer data-bind="attr: { src: url }"></script>
+          </div>
+
+          <div id="detail-pane">
+
+          <button id="done">&#10006;</button>
+
+          <details open><summary></summary> <!-- semantic tag only, widget not required -->
+            <table id="mob-business-details">
+              <tbody data-bind="foreach: myDetail">
+                  <tr><td class="det-param">NAME: </td><td class="det-arg" data-bind="text:[name]"></td></tr>
+                  <tr class="mob-bus-det-status"><td class="det-param">STATUS: </td><td class="det-arg"><span class="stat-text" data-bind="text:[status]"></span></td></tr>
+                  <tr><td class="det-param">MORE: </td><td><a class = "url" class="det-arg" data-bind="attr: { href: url }"><span data-bind="text:[yelpLink]"></span></a></td></tr>
+                  <tr><td class="det-param">PHONE: </td><td class="det-arg" data-bind="text:[phone]"></td></tr>
+                  <tr><td class="det-param">ADDRESS: </td><td class="det-arg" data-bind="text:[address]"></td></tr>
+                  <tr><td class="det-param">PR/RTNG/DIST: </td><td class="det-arg" data-bind="text: [mob_stats]"></td></tr>
+                  <tr><td class="det-param">DIRECTIONS: </td><td><a class = "url" class="det-arg" data-bind="attr: { href: dir_url }"><span>Google Maps Directions</span></a></td></tr>
+              </tbody>
+            </table>
+          </details>
+
+
+          <details open><summary></summary> <!-- semantic tag only, widget not required -->
+            <div id = "business-details" data-bind="foreach: myDetail">
+              <div class="row">
+                <span class="bus-det-status"><span class="det-param status">STATUS: </span><span class="det-arg" data-bind="text:[status]"></span></span>
+                <span><span class="det-param">NAME: </span><span class="det-arg" data-bind="text:[name]"></span></span>
+                <span><span class="det-param">MORE: </span><span ><a data-bind="attr: { href: url }"><span><img class="yelp-logo" id="det-yelp-url" src="{{ url_for('static',filename='assets/img/logos/yelp_logo.png') }}" alt="yelp-logo"></span></a></span></span>
+              </div>
+              <div class="row">
+                <span><span class="det-param">PHONE: </span><span class="det-arg" data-bind="text:[phone]"></span></span>
+                <span><span class="det-param">ADDRESS: </span><span class="det-arg" data-bind="text:[address]"></span></span>
+              </div>
+              <div class="row">
+                <span><span class="det-param">PRICE: </span><span class="det-arg" data-bind="text:[price]"></span></span>
+                <span><span class="det-param">RATING: </span><span class="det-arg" data-bind="text:[rating]"></span></span>
+                <span><span class="det-param">REVIEW COUNT: </span><span class="det-arg" data-bind="text:[review_count]"></span></span>
+                <span><span class="det-param">DISTANCE: </span><span class="det-arg" data-bind="text:[distance]"></span></span>
+                <span><span class="det-param">DIRECTIONS: </span><span class="det-arg url"><a data-bind="attr: { href: dir_url }"><span>Google Maps Directions</span></a></span></span>
+              </div>
+              <hr>
+              <div class="row" id="photos">
+                <span><a data-bind="attr:{href:photos[0]}"><img class="bus-det-photo" data-bind="attr:{src: photos[0]}" alt=""/></a></span>
+                <span><a data-bind="attr:{href:photos[1]}"><img class="bus-det-photo" data-bind="attr:{src: photos[1]}" alt=""/></a></span>
+                <span><a data-bind="attr:{href:photos[2]}"><img class="bus-det-photo" data-bind="attr:{src: photos[2]}" alt=""/></a></span>
+              </div>
+            </div>
+          </details>
+
+          </div>
+
+        </div>
+
+        </main>
+
+    </div> <!--row-->
+
+  </div> <!--container-->
+
+
+  <!-- fonts -->  
+  <link href="https://fonts.googleapis.com/css?family=Exo+2:200,400" rel="stylesheet">
+
+  <!-- styles -->  
+  <link rel="stylesheet" type = "text/css" href= "{{ url_for('static',filename='lib/bootstrap/bootstrap.min.css')}}">  
+  <link rel="stylesheet" type = "text/css" href= "{{ url_for('static',filename='assets/css/main.css')}}">
+  <link rel="stylesheet" type = "text/css" href= "{{ url_for('static',filename='assets/css/flex.css')}}">
+
+  <!-- scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js"></script>
+  
+  
+  <script src= "{{ url_for('static', filename='assets/js/showMarkers.js')}}"></script>
+  <script src= "{{ url_for('static', filename='assets/js/defMap.js')}}"></script>
+  <script src= "{{ url_for('static', filename='assets/js/map.js')}}"></script>
+  <script src= "{{ url_for('static', filename='assets/js/fusion.js')}}"></script>
+
+  </body>
+
+</html>
+

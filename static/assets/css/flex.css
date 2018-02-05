@@ -1,0 +1,138 @@
+@media screen and (max-width: 410) {
+	#msg-area {
+		font-size: 10px;
+	}
+}
+
+@media screen and (max-width: 600px) {
+
+	.gm-style-mtc {
+		display: none;
+	}
+	
+	#banner {
+		margin-top: 0;
+	}
+
+	#mantra {
+		display: none;
+	}
+
+	#options-box {				
+		height: 32vh;
+	}
+
+	#map {
+		height:68vh;
+	}
+
+	#gps-search {
+		margin-left: 5vw;
+	}
+
+	#yelp-list {
+		max-width: 18vw;
+		margin-top: -1.6vh;
+	}
+
+	#open-now {
+		width: initial;
+	}
+
+	#title-divider {
+		margin-top: 0;
+		margin-bottom: 1vh;
+	}
+
+	#listings {	
+		display: none;
+	}
+
+	#floating-listings:hover {
+		height: 30vh;
+		opacity: 1;
+	}
+
+	#floating-listings {
+		position: fixed;	
+		z-index: 100000000;	
+		margin-top: 0;
+		height: 12vh;
+		overflow:scroll;
+		background-color:#24282B;
+		opacity: 0.7;
+		width: 90%;
+		display: inline-flex;		
+	}
+
+	#business-details {
+		display: none;
+	}
+
+	#mob-business-details {
+		display: inline-block;		
+	}
+
+	div img.iw-yelp-logo {
+		max-width: 15vw;
+	}
+
+}
+
+
+@media screen and (min-width: 600px) and (max-width: 743px) {
+	#mantra {
+		font-size: 14px;
+	}
+}
+
+@media screen and (max-width: 731px) {
+	#search-loc {
+		width: 75%;
+	}
+}
+
+
+@media screen and (min-width: 600px) and (max-width: 743px) {
+
+	#rank-by {
+		margin: 0;
+	}
+
+	#max-dist {
+		margin-left: 1.5vw;
+		margin-right: 1vw;
+	}
+
+	#filt-max-dist {
+		width: 50px;
+	}
+
+	#max-dist-unit {
+		margin:0
+
+	}
+
+	#filt-max-dist-unit {
+		margin-left: 0.5vw;
+	}
+
+	#open-now {
+		margin-left: 4vw;
+		font-size: 10px;
+	}
+
+	#opt-rank-by {
+		width: 50px;
+	}
+
+}
+
+@media screen and (min-width: 1200px) and (max-width: 1320px) {
+
+	#search-loc {
+		width: 75%;
+	}
+
+}
+
